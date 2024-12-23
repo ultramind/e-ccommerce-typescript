@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { config } from "../../config";
-import { getData } from "../lib";
+import { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import { CategoryProps } from "../../type";
 import { Link } from "react-router-dom";
 import CustomRightArrow from "./CustomRightArrow";
 import CustomLeftArrow from "./CustomLeftArrow";
+import {categories as cat} from '../../constants/data.js'
 
 const responsive = {
   superLargeDesktop: {
@@ -32,13 +31,8 @@ const BannerCategories = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/categories`;
-      try {
-        const data = await getData(endpoint);
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      const categoryData:any = cat;
+      setCategories(categoryData)
     };
     fetchData();
   }, []);

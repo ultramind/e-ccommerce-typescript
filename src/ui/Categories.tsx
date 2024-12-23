@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "./Container";
 import { config } from "../../config";
 import { getData } from "../lib";

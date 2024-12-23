@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { config } from "../../config";
 import { getData } from "../lib";
 import { RotatingLines } from "react-loader-spinner";

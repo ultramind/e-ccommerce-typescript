@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { config } from "../../config";
 import { ProductProps } from "../../type";
 import { getData } from "../lib";
 import Loading from "../ui/Loading";
 import Container from "../ui/Container";
-import _, { divide } from "lodash";
+import _ from "lodash";
 import PriceTag from "../ui/PriceTag";
 import { MdOutlineStarOutline } from "react-icons/md";
 import { FaRegEye } from "react-icons/fa";
