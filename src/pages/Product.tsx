@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { config } from "../../config";
 import { ProductProps } from "../../type";
-import { getData } from "../lib";
 import Loading from "../ui/Loading";
 import Container from "../ui/Container";
 import _ from "lodash";
@@ -15,6 +14,7 @@ import AddToCartBtn from "../ui/AddToCartBtn";
 import { productPayment } from "../assets";
 import ProductCard from "../ui/ProductCard";
 import CategoryFilters from "../ui/CategoryFilters";
+import {products} from "../../constants/data.js"
 
 const Product = () => {
   const [productData, setProductData] = useState<ProductProps | null>(null);
@@ -32,12 +32,13 @@ const Product = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getData(endpoint);
+        const productData:any = products.find((item:any) => item._id == id)
         if (id) {
-          setProductData(data);
+          setProductData(productData);
           setAllProducts([]);
         } else {
-          setAllProducts(data);
+          const productData:any = products;
+          setAllProducts(productData);
           setProductData(null);
         }
       } catch (error) {

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { config } from "../../config";
-import { getData } from "../lib";
 import Loading from "../ui/Loading";
 import Container from "../ui/Container";
 import CategoryFilters from "../ui/CategoryFilters";
 import ProductCard from "../ui/ProductCard";
 import { ProductProps } from "../../type";
+import {products as productData} from "../../constants/data.ts"
 
 const Category = () => {
   const { id } = useParams();
@@ -14,20 +13,17 @@ const Category = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/categories/${id}`;
-      try {
-        setLoading(true);
-        const data = await getData(endpoint);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      setLoading(true)
+      const formatedId = formatId(id!);
+      const product:any = productData.filter((item:any)=>item.category == formatedId)
+      setProducts(product)
+      setLoading(false)
+    }
 
     fetchData();
   }, [id]);
+
+  // console.log("products", products)
 
   const formatId = (id: string) => {
     return id
