@@ -14,6 +14,7 @@ import brandFive from "./brands/brandFive.webp";
 import brandSix from "./brands/brandSix.webp";
 import productPayment from "./productPayment.webp";
 import homeBanner from "./homeBanner.jpg";
+import bannerImage from './banner-1.jpg'
 
 export {
   logo,
@@ -32,4 +33,5 @@ export {
   brandSix,
   productPayment,
   homeBanner,
+  bannerImage
 };
