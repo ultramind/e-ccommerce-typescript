@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import Container from "./Container";
 import Title from "./Title";
-import { config } from "../../config";
-import { getData } from "../lib";
 import { BlogProps } from "../../type";
+import {blogsData as blog} from "../../constants/data.js"
 
 const Blog = () => {
   const [blogsData, setBlogsData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/blogs`;
-      try {
-        const data = await getData(endpoint);
-        setBlogsData(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      const blogPosts:any = blog
+     setBlogsData(blogPosts)
     };
 
     fetchData();
