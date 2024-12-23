@@ -10,13 +10,14 @@ import { FaChevronDown } from "react-icons/fa";
 import { FiShoppingBag, FiStar, FiUser } from "react-icons/fi";
 import { IoClose, IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { logo } from "../assets";
-import Container from "./Container";
-import { config } from "../../config";
-import { getData } from "../lib";
-import { CategoryProps, ProductProps } from "../../type";
-import ProductCard from "./ProductCard";
-import { store } from "../lib/store";
+import { logo } from "../../assets";
+import Container from "../Container";
+import { CategoryProps, ProductProps } from "../../../type";
+import ProductCard from "../ProductCard";
+import { store } from "../../lib/store";
+import {products as allProduct} from "../../../constants/data.ts"
+import {categories as cat} from "../../../constants/data.ts"
+import avatarIcon from "../../assets/avatar.png"
 
 const bottomNavigation = [
   { title: "Home", link: "/" },
@@ -35,26 +36,16 @@ const Header = () => {
   const { cartProduct, favoriteProduct, currentUser } = store();
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/products`;
-      try {
-        const data = await getData(endpoint);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      const productData:any = allProduct;
+      setProducts(productData)
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/categories`;
-      try {
-        const data = await getData(endpoint);
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      const categoriesData:any = cat;
+      setCategories(categoriesData)
     };
     fetchData();
   }, []);
@@ -80,7 +71,7 @@ const Header = () => {
             onChange={(e) => setSearchText(e.target.value)}
             value={searchText}
             placeholder="Search products..."
-            className="w-full flex-1 rounded-full text-gray-900 text-lg placeholder:text-base placeholder:tracking-wide shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:font-normal focus:ring-1 focus:ring-darkText sm:text-sm px-4 py-2"
+            className="w-full flex-1 rounded-full text-gray-900 text-lg placeholder:text-base placeholder:tracking-wide shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:font-normal focus:ring-1 focus:ring-whiteText sm:text-sm px-4 py-2"
           />
           {searchText ? (
             <IoClose
@@ -121,7 +112,7 @@ const Header = () => {
           <Link to={"/profile"}>
             {currentUser ? (
               <img
-                src={currentUser?.avatar}
+                src={currentUser.avatar !== null ? currentUser?.avatar : avatarIcon}
                 alt="profileImg"
                 className="w-10 h-10 rounded-full object-cover"
               />
@@ -143,10 +134,10 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <div className="w-full bg-darkText text-whiteText">
+      <div className="w-full bg-primary text-whiteText">
         <Container className="py-2 max-w-4xl flex items-center gap-5 justify-between">
           <Menu>
-            <MenuButton className="inline-flex items-center gap-2 rounded-md border border-gray-400 hover:border-white py-1.5 px-3 font-semibold text-gray-300 hover:text-whiteText">
+            <MenuButton className="inline-flex items-center gap-2 rounded-md border border-whiteText hover:border-white py-1.5 px-3 font-semibold text-whiteText hover:text-whiteText">
               Select Category <FaChevronDown className="text-base mt-1" />
             </MenuButton>
             <Transition
@@ -183,7 +174,7 @@ const Header = () => {
             <Link
               to={link}
               key={title}
-              className="uppercase hidden md:inline-flex text-sm font-semibold text-whiteText/90 hover:text-whiteText duration-200 relative overflow-hidden group"
+              className="uppercase hidden md:inline-flex text-sm font-semibold text-whiteText hover:text-whiteText duration-200 relative overflow-hidden group"
             >
               {title}
               <span className="inline-flex w-full h-[1px] bg-whiteText absolute bottom-0 left-0 transform -translate-x-[105%] group-hover:translate-x-0 duration-300" />

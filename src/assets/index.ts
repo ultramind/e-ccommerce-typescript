@@ -1,4 +1,4 @@
-import logo from "./logo.webp";
+import logo from "./logo.png";
 import discountImgOne from "./discountImgOne.png";
 import discountImgTwo from "./discountImgTwo.webp";
 import homeIcon from "./footerIcons/homeIcon.webp";
