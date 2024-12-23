@@ -4,7 +4,7 @@ import { CategoryProps } from "../../type";
 import { Link } from "react-router-dom";
 import CustomRightArrow from "./CustomRightArrow";
 import CustomLeftArrow from "./CustomLeftArrow";
-import {categories as cat} from '../../constants/data.js'
+import {categories as cat} from '../../constants/data.ts'
 
 const responsive = {
   superLargeDesktop: {
