@@ -1,23 +1,17 @@
 import { useEffect, useState } from "react";
 import Container from "./Container";
-import { config } from "../../config";
-import { getData } from "../lib";
 import Title from "./Title";
 import { Link } from "react-router-dom";
 import { CategoryProps } from "../../type";
+import {categories as cat} from "../../constants/data.js"
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/categories`;
-      try {
-        const data = await getData(endpoint);
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      const categoriesData:any = cat
+      setCategories(categoriesData)
     };
     fetchData();
   }, []);

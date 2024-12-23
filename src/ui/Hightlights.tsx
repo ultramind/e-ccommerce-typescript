@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import Container from "./Container";
-import { getData } from "../lib";
-import { config } from "../../config";
 import { HighlightsType } from "../../type";
 import { Link } from "react-router-dom";
+import {highlightsProducts as highlights} from "../../constants/data.js"
 
 const Hightlights = () => {
   const [highlightsData, setHighlightsData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/highlights`;
-      try {
-        const data = await getData(endpoint);
-        setHighlightsData(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      const highlightsProducts:any = highlights
+     setHighlightsData(highlightsProducts)
     };
 
     fetchData();
