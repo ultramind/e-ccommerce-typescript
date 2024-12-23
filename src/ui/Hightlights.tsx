@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Container from "./Container";
 import { HighlightsType } from "../../type";
 import { Link } from "react-router-dom";
-import {highlightsProducts as highlights} from "../../constants/data.js"
+import {highlightsProducts as highlights} from "../../constants/data.ts"
 
 const Hightlights = () => {
   const [highlightsData, setHighlightsData] = useState([]);

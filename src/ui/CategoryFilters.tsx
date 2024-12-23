@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { CategoryProps } from "../../type";
 import { Link } from "react-router-dom";
-import {categories as categoryData} from "../../constants/data.js"
+import {categories as categoryData} from "../../constants/data.ts"
 
 const CategoryFilters = ({ id }: { id: string | undefined }) => {
   const [categories, setCategories] = useState([]);

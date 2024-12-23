@@ -3,7 +3,7 @@ import Container from "./Container";
 import Title from "./Title";
 import { Link } from "react-router-dom";
 import { CategoryProps } from "../../type";
-import {categories as cat} from "../../constants/data.js"
+import {categories as cat} from "../../constants/data.ts"
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
