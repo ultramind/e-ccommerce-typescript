@@ -4,6 +4,7 @@ import Label from "./Label";
 import { MdPhotoLibrary } from "react-icons/md";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
+import upload from "../lib/upload";
 import { doc, setDoc } from "firebase/firestore";
 import Login from "./Login";
 
@@ -33,10 +34,9 @@ const Registration = () => {
       setLoading(true);
       const res = await createUserWithEmailAndPassword(auth, email, password);
       let imageUrl = null;
-      // upload file to file storage
-      // if (avatar && avatar?.file) {
-      //   imageUrl = await upload(avatar?.file);
-      // }
+      if (avatar && avatar?.file) {
+        imageUrl = await upload(avatar?.file);
+      }
       await setDoc(doc(db, "users", res.user.uid), {
         firstName,
         lastName,
@@ -68,11 +68,11 @@ const Registration = () => {
     }
   };
   return (
-    <div className="w-full flex justify-center items-center">
+    <div>
       {login ? (
         <Login setLogin={setLogin} />
       ) : (
-        <div className="bg-gray-950 rounded-lg lg:w-[35%] p-4">
+        <div className="bg-gray-950 rounded-lg">
           <form
             onSubmit={handleRegistration}
             className="max-w-5xl mx-auto pt-10 px-10 lg:px-0 text-white"
@@ -87,8 +87,8 @@ const Registration = () => {
               </p>
             </div>
             <div className="border-b border-b-white/10 pb-5">
-              <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-1">
-                <div className="sm:col-span-4">
+              <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-6">
+                <div className="sm:col-span-3">
                   <Label title="First name" htmlFor="firstName" />
                   <input
                     type="text"
@@ -96,7 +96,7 @@ const Registration = () => {
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 px-4 outline-none text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-skyText sm:text-sm sm:leading-6 mt-2"
                   />
                 </div>
-                <div className="sm:col-span-4">
+                <div className="sm:col-span-3">
                   <Label title="Last name" htmlFor="lastName" />
                   <input
                     type="text"
@@ -120,7 +120,7 @@ const Registration = () => {
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 px-4 outline-none text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-skyText sm:text-sm sm:leading-6 mt-2"
                   />
                 </div>
-                <div className="col-span-4">
+                <div className="col-span-full">
                   <div className="mt-2 flex items-center gap-x-3">
                     <div className="flex-1">
                       <Label title="Cover photo" />
@@ -174,7 +174,7 @@ const Registration = () => {
                 loading ? "bg-gray-500 hover:bg-gray-500" : "bg-indigo-700"
               }`}
             >
-              {loading ? "Loading..." : "Submit"}
+              {loading ? "Loading..." : "Send"}
             </button>
           </form>
           <p className="text-sm leading-6 text-gray-400 text-center -mt-2 py-10">

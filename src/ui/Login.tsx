@@ -41,21 +41,21 @@ const Login = ({ setLogin }: { setLogin: any }) => {
     }
   };
   return (
-    <div className="bg-gray-950 rounded-lg p-4">
+    <div className="bg-gray-950 rounded-lg">
       <form
         onSubmit={handleLogin}
         className="max-w-5xl mx-auto pt-10 px-10 lg:px-0 text-white"
       >
         <div className="border-b border-b-white/10 pb-5">
           <h2 className="text-lg font-semibold uppercase leading-7">
-            Login Form
+            Registration Form
           </h2>
           <p className="mt-1 text-sm leading-6 text-gray-400">
-            You need to provide required information to get login with us.
+            You need to provide required information to get register with us.
           </p>
         </div>
         <div className="border-b border-b-white/10 pb-5">
-          <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1">
+          <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <Label title="Email address" htmlFor="email" />
               <input
