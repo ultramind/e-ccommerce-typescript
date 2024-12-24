@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { UserTypes } from "../../type";
 import { auth } from "../lib/firebase";
 import Container from "./Container";
+import avatar from "../assets/avatar.png"
 
 const UserInfo = ({ currentUser }: UserTypes) => {
   console.log(currentUser);
@@ -14,7 +15,7 @@ const UserInfo = ({ currentUser }: UserTypes) => {
             src={
               currentUser?.avatar
                 ? currentUser?.avatar
-                : "https://i.ibb.co/mJRkRRV/png-clipart-profile-logo-computer-icons-user-user-blue-heroes-thumbnail.png"
+                : avatar
             }
             alt="userImage"
             className="w-40 h-40 rounded-full border border-gray-700 object-cover p-1"
@@ -37,22 +38,7 @@ const UserInfo = ({ currentUser }: UserTypes) => {
           </div>
         </div>
         <div className="mt-10 flex items-center gap-x-5 px-4">
-          <button
-            onClick={() =>
-              toast.error("Edit profile option available to pro version!")
-            }
-            className="rounded-md bg-white px-8 py-2.5 text-sm font-semibold  text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-          >
-            Edit profile
-          </button>
-          <button
-            onClick={() =>
-              toast.error("Add Address option available to pro version!")
-            }
-            className="rounded-md bg-white px-8 py-2.5 text-sm font-semibold  text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-          >
-            Add Address
-          </button>
+          
           <button
             onClick={() => auth.signOut()}
             className="rounded-md bg-white px-8 py-2.5 text-sm font-semibold  text-gray-900 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
