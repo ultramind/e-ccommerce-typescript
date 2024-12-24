@@ -1,7 +1,7 @@
 import { MdOutlineStarOutline } from "react-icons/md";
 import { ProductProps } from "../../type";
 import AddToCartBtn from "./AddToCartBtn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -11,8 +11,10 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import FormattedPrice from "./FormattedPrice";
-import ProductCardSideNav from "./ProductCardSideNav";
 import { useNavigate } from "react-router-dom";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { store } from "../lib/store";
+import toast from "react-hot-toast";
 interface Props {
   item: ProductProps;
   setSearchText?: any;
@@ -21,6 +23,30 @@ interface Props {
 const ProductCard = ({ item, setSearchText }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigation = useNavigate();
+
+  const { addToFavorite, favoriteProduct } = store();
+  const [existingProduct, setExistingProduct] = useState<ProductProps | null>(
+    null
+  );
+
+  useEffect(() => {
+    const availableItem = favoriteProduct.find(
+      (x) => x?._id === item?._id
+    );
+    setExistingProduct(availableItem || null);
+  }, [item, favoriteProduct]);
+
+  const handleFavorite = () => {
+    if (item) {
+      addToFavorite(item).then(() => {
+        toast.success(
+          existingProduct
+            ? `${item?.name.substring(0, 10)} removed successfully!`
+            : `${item?.name.substring(0, 10)} added successfully!`
+        );
+      });
+    }
+  };
 
   const open = () => {
     setIsOpen(true);
@@ -36,21 +62,27 @@ const ProductCard = ({ item, setSearchText }: Props) => {
     setSearchText && setSearchText("");
   };
   return (
-    <div className="border border-gray-200 rounded-lg p-1 overflow-hidden hover:border-black duration-200 cursor-pointer">
+    <div className="border border-gray-100 rounded-lg p-1 overflow-hidden hover:border-gray-100 duration-200 cursor-pointer">
       <div className="w-full h-60 relative p-2 group">
         <span
           onClick={open}
-          className="bg-black text-skyText absolute left-0 right-0 w-16 text-xs text-center py-1 rounded-md font-semibold inline-block z-10"
+          className="bg-gray-400 p-1 text-white absolute left-0 right-0 w-20 text-xs text-center py-1 rounded-md font-semibold inline-block z-10"
         >
           save {percentage.toFixed(0)}%
         </span>
+        <span
+            onClick={handleFavorite}
+                className="w-11 h-11 inline-flex text-black text-lg items-center justify-center rounded-full absolute right-0 z-50 top-0"
+              >
+                {existingProduct ? <FaStar color="red"/> : <FaRegStar color="red" />}
+              </span>
         <img
           onClick={handleProduct}
           src={item?.images[0]}
           alt="productImage"
           className="w-full h-full rounded-md object-cover group-hover:scale-110 duration-300"
         />
-        <ProductCardSideNav product={item} />
+        {/* <ProductCardSideNav product={item} /> */}
       </div>
       <div className="flex flex-col gap-2 px-2 pb-2">
         <h3 className="text-xs uppercase font-semibold text-lightText">

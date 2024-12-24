@@ -54,7 +54,7 @@ const AddToCartBtn = ({
   };
 
   const newClassName = twMerge(
-    "bg-[#f7f7f7] uppercase text-xs py-3 text-center rounded-full font-semibold hover:bg-black hover:text-white hover:scale-105 duration-200 cursor-pointer",
+    "bg-gray-300 uppercase text-xs py-3 text-center rounded-full font-semibold hover:bg-black hover:text-white hover:scale-105 duration-200 cursor-pointer",
     className
   );
 

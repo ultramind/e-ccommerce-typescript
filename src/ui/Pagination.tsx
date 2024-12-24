@@ -1,10 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { config } from "../../config";
-import { getData } from "../lib";
 import { ProductProps } from "../../type";
 import ProductCard from "./ProductCard";
 import ReactPaginate from "react-paginate";
+import {products as allProduct} from "../../constants/data.ts"
 
 interface ItemsProps {
   currentItems: ProductProps[];
@@ -26,14 +25,9 @@ const Pagination = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const endpoint = `${config?.baseUrl}/products`;
-      try {
-        const data = await getData(endpoint);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
-    };
+      const productData:any = allProduct
+      setProducts(productData)
+    }
     fetchData();
   }, []);
   const itemsPerPage = 15;
